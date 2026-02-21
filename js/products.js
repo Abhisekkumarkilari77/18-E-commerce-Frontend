@@ -1,17 +1,30 @@
-// Mock product catalog for the demo storefront.
-// In a real app this would be fetched from an API.
 
-// To keep code readable while still showing scale,
-// we define a small set of base products across many categories
-// and then generate a larger catalog (500 items) from them.
+function buildProductPlaceholder(label, width = 640, height = 480) {
+  const safeLabel = String(label || "Product")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+  const svg = [
+    `<svg xmlns='http://www.w3.org/2000/svg' width='${width}' height='${height}' viewBox='0 0 ${width} ${height}'>`,
+    "<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>",
+    "<stop offset='0%' stop-color='#2a5caa'/>",
+    "<stop offset='100%' stop-color='#48a9a6'/>",
+    "</linearGradient></defs>",
+    `<rect width='${width}' height='${height}' fill='url(#g)'/>`,
+    "<circle cx='85%' cy='20%' r='64' fill='rgba(255,255,255,0.2)'/>",
+    "<circle cx='15%' cy='80%' r='92' fill='rgba(255,255,255,0.12)'/>",
+    `<text x='50%' y='52%' text-anchor='middle' fill='#ffffff' font-family='Segoe UI, Arial, sans-serif' font-size='34' font-weight='700'>${safeLabel}</text>`,
+    "</svg>"
+  ].join("");
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
 
 const baseProducts = [
   {
     id: 1,
     name: "Wireless Noise-Cancelling Headphones",
     price: 5999,
-    image:
-      "https://via.placeholder.com/640x480.png?text=Wireless+Headphones",
+    image: "https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=1200",
     rating: 4.6,
     reviewsCount: 184,
     category: "Audio",
@@ -30,8 +43,7 @@ const baseProducts = [
     id: 2,
     name: "Mechanical Keyboard (Brown Switches)",
     price: 3999,
-    image:
-      "https://via.placeholder.com/640x480.png?text=Mechanical+Keyboard",
+    image: "https://images.pexels.com/photos/2115257/pexels-photo-2115257.jpeg?auto=compress&cs=tinysrgb&w=1200",
     rating: 4.7,
     reviewsCount: 251,
     category: "Accessories",
@@ -50,7 +62,7 @@ const baseProducts = [
     id: 3,
     name: "1080p HD Webcam",
     price: 2499,
-    image: "https://via.placeholder.com/640x480.png?text=HD+Webcam",
+    image: "https://images.pexels.com/photos/4792728/pexels-photo-4792728.jpeg?auto=compress&cs=tinysrgb&w=1200",
     rating: 4.3,
     reviewsCount: 96,
     category: "Accessories",
@@ -69,7 +81,7 @@ const baseProducts = [
     id: 4,
     name: "USB-C 65W Fast Charger",
     price: 1499,
-    image: "https://via.placeholder.com/640x480.png?text=USB-C+Charger",
+    image: "https://images.pexels.com/photos/4526414/pexels-photo-4526414.jpeg?auto=compress&cs=tinysrgb&w=1200",
     rating: 4.5,
     reviewsCount: 312,
     category: "Power",
@@ -87,7 +99,7 @@ const baseProducts = [
     id: 5,
     name: "Smart Fitness Band",
     price: 2199,
-    image: "https://via.placeholder.com/640x480.png?text=Fitness+Band",
+    image: "https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&w=1200",
     rating: 4.2,
     reviewsCount: 421,
     category: "Wearables",
@@ -106,7 +118,7 @@ const baseProducts = [
     id: 6,
     name: "True Wireless Earbuds",
     price: 2799,
-    image: "https://via.placeholder.com/640x480.png?text=Wireless+Earbuds",
+    image: "https://images.pexels.com/photos/3780681/pexels-photo-3780681.jpeg?auto=compress&cs=tinysrgb&w=1200",
     rating: 4.4,
     reviewsCount: 305,
     category: "Audio",
@@ -124,7 +136,7 @@ const baseProducts = [
     id: 7,
     name: "14-inch Ultrabook Laptop",
     price: 64999,
-    image: "https://via.placeholder.com/640x480.png?text=Ultrabook+Laptop",
+    image: "https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1200",
     rating: 4.5,
     reviewsCount: 143,
     category: "Laptops",
@@ -143,7 +155,7 @@ const baseProducts = [
     id: 8,
     name: "27-inch IPS Monitor",
     price: 18999,
-    image: "https://via.placeholder.com/640x480.png?text=IPS+Monitor",
+    image: "https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg?auto=compress&cs=tinysrgb&w=1200",
     rating: 4.4,
     reviewsCount: 89,
     category: "Monitors",
@@ -161,7 +173,7 @@ const baseProducts = [
     id: 9,
     name: "Portable SSD 1TB",
     price: 9999,
-    image: "https://via.placeholder.com/640x480.png?text=Portable+SSD",
+    image: "https://images.pexels.com/photos/4195325/pexels-photo-4195325.jpeg?auto=compress&cs=tinysrgb&w=1200",
     rating: 4.6,
     reviewsCount: 204,
     category: "Storage",
@@ -179,7 +191,7 @@ const baseProducts = [
     id: 10,
     name: "Smart LED Light Strip",
     price: 1999,
-    image: "https://via.placeholder.com/640x480.png?text=LED+Light+Strip",
+    image: "https://images.pexels.com/photos/1441151/pexels-photo-1441151.jpeg?auto=compress&cs=tinysrgb&w=1200",
     rating: 4.1,
     reviewsCount: 178,
     category: "Smart Home",

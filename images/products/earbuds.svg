@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#042a2b"/>
+      <stop offset="100%" stop-color="#5eb1bf"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="url(#bg)"/>
+  <rect x="215" y="165" width="80" height="170" rx="35" fill="#ffffff"/>
+  <rect x="345" y="165" width="80" height="170" rx="35" fill="#ffffff"/>
+  <circle cx="255" cy="200" r="14" fill="#5eb1bf"/>
+  <circle cx="385" cy="200" r="14" fill="#5eb1bf"/>
+  <text x="320" y="420" text-anchor="middle" font-size="40" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif">Earbuds</text>
+</svg>

@@ -1,4 +1,3 @@
-// Shared UI logic and per-page initialization.
 
 document.addEventListener("DOMContentLoaded", () => {
   const page = document.body.dataset.page || "home";
@@ -38,6 +37,25 @@ function initCartBadge() {
 
 function refreshCartBadge() {
   initCartBadge();
+}
+
+function getImageFallback(label, width, height) {
+  if (typeof buildProductPlaceholder === "function") {
+    return buildProductPlaceholder(label || "Product", width, height);
+  }
+  return "";
+}
+
+function applySafeImage(imgEl, src, label, width, height) {
+  const fallback = getImageFallback(label, width, height);
+  imgEl.src = src || fallback;
+  imgEl.loading = "lazy";
+  imgEl.decoding = "async";
+  imgEl.addEventListener("error", () => {
+    if (fallback && imgEl.src !== fallback) {
+      imgEl.src = fallback;
+    }
+  });
 }
 
 function attachGlobalHandlers() {
@@ -144,8 +162,8 @@ function renderProducts(container, list) {
     imageWrapper.href = `product.html?id=${encodeURIComponent(product.id)}`;
 
     const img = document.createElement("img");
-    img.src = product.image || "https://via.placeholder.com/400x300?text=Product";
     img.alt = product.name;
+    applySafeImage(img, product.image, product.name, 400, 300);
     imageWrapper.appendChild(img);
 
     const body = document.createElement("div");
@@ -256,9 +274,8 @@ function initProductPage() {
     descEl.textContent = product.description;
   }
   if (imageEl) {
-    imageEl.src =
-      product.image || "https://via.placeholder.com/640x480?text=Product";
     imageEl.alt = product.name;
+    applySafeImage(imageEl, product.image, product.name, 640, 480);
   }
   if (specsList && product.specs) {
     specsList.innerHTML = "";
@@ -346,10 +363,8 @@ function initCartPage() {
       const imageWrap = document.createElement("div");
       imageWrap.className = "cart-item-image";
       const img = document.createElement("img");
-      img.src =
-        product.image ||
-        "https://via.placeholder.com/120x120?text=Product";
       img.alt = product.name;
+      applySafeImage(img, product.image, product.name, 120, 120);
       imageWrap.appendChild(img);
 
       const main = document.createElement("div");
